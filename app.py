@@ -42,7 +42,7 @@ def app():
     This app predicts the price of a car based on various features such as the make, model, mileage, and more.
     Please fill in the details below to get the predicted price.
                 
-    Please not that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
+    Please note that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
     """)
 
     # Create input fields for features, organized into columns for better UX
