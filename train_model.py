@@ -88,7 +88,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 model1 = RandomForestRegressor(random_state=23)
 model1.fit(X_train, y_train)
 
-joblib.dump(model, 'car_price_predictor.pkl')
+joblib.dump(model1, 'car_price_predictor.pkl')
 joblib.dump(normalizer, 'scaler.pkl')
 joblib.dump(label_encoders, 'label_encoders.pkl')
 
