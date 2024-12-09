@@ -19,7 +19,7 @@ dt['mileage'] = dt['mileage'].fillna(dt['mileage'].median())
 dt['year_of_registration'] = dt['year_of_registration'].fillna(dt['year_of_registration'].median())
 
 # Feature Selection
-dt_select = dt.drop(columns=['public_reference','reg_code'], inplace=False)
+dt_select = dt.drop(columns=['public_reference','reg_code','crossover_car_and_van'], inplace=False)
 dt_sampled = dt_select.sample(n=10000, random_state=23)
 
 # Data Encoding
@@ -28,7 +28,7 @@ ordinal_encoder = OrdinalEncoder(categories=[condition_order])
 dt_sampled['vehicle_condition'] = ordinal_encoder.fit_transform(dt_sampled[['vehicle_condition']])
 
 label_encoders = {}
-categorical_columns = ['standard_make', 'standard_colour', 'standard_model', 'body_type', 'fuel_type', 'crossover_car_and_van']
+categorical_columns = ['standard_make', 'standard_colour', 'standard_model', 'body_type', 'fuel_type']
 for col in categorical_columns:
     le = LabelEncoder()
     dt_sampled[col] = le.fit_transform(dt_sampled[col])

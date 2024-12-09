@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import json
 
 # Load the trained model, scaler, and encoders
 model = joblib.load('car_price_predictor.pkl')
@@ -19,7 +20,7 @@ def preprocess_input(features):
     features['vehicle_condition'] = ordinal_encoder.transform([[features['vehicle_condition'][0]]])[0]
 
     # Apply label encoding for categorical variables
-    for col in ['standard_make', 'standard_colour', 'standard_model', 'body_type', 'fuel_type', 'crossover_car_and_van']:
+    for col in ['standard_make', 'standard_colour', 'standard_model', 'body_type', 'fuel_type']:
         features[col] = label_encoders[col].transform([features[col][0]])[0]
 
     # Apply scaling for 'mileage' and 'year_of_registration'
@@ -28,7 +29,7 @@ def preprocess_input(features):
     # Reorder the features based on the model's expected input order
     feature_columns = ['mileage', 'standard_colour', 'standard_make',
                        'standard_model', 'vehicle_condition', 'year_of_registration',
-                       'body_type', 'crossover_car_and_van', 'fuel_type']
+                       'body_type', 'fuel_type']
     
     return features
 
@@ -39,38 +40,42 @@ def app():
     # Add introductory text
     st.markdown("""
     ## Welcome to the Car Price Prediction App!
-    This app predicts the price of a car based on various features such as the make, model, mileage, and more.
-    Please fill in the details below to get the predicted price.
-                
-    Please not that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
+    This app predicts the price of a car based on various features.
     """)
 
-    # Create input fields for features, organized into columns for better UX
-    col1, col2 = st.columns(2)
+    # Load the make-model mapping
+    with open('make_model_mapping.json', 'r') as json_file:
+        make_model_mapping = json.load(json_file)
 
-    with col1:
-        standard_make = st.text_input('Car Make', 'Toyota')
-        standard_model = st.text_input('Car Model', 'Yaris')
-        standard_colour = st.text_input('Car Colour', 'White')
-        body_type = st.text_input('Body Type', 'Hatchback')
-        vehicle_condition = st.selectbox('Vehicle Condition', ['USED', 'NEW'])
+    # Dropdown for Car Make and Model
+    selected_make = st.selectbox('Select Car Make', list(make_model_mapping.keys()))
+    selected_model = st.selectbox('Select Car Model', make_model_mapping[selected_make] if selected_make else [])
 
-    with col2:
-        mileage = st.number_input('Mileage', min_value=0)
-        year_of_registration = st.number_input('Year of Registration', min_value=1900, max_value=2024)
-        fuel_type = st.text_input('Fuel Type', 'Petrol')
-        crossover_car_and_van = st.selectbox('Crossover Car and Van', ['False', 'True'])
+    # Other input fields
+    mileage = st.number_input('Mileage', min_value=0)
+    year_of_registration = st.number_input('Year of Registration', min_value=1900, max_value=2024)
+    standard_colour = st.text_input('Car Colour', 'Grey', 'Blue', 'Brown', 'Red', 'Bronze', 'Black', 'White','Silver', 'Purple', 'Green', 'Orange', 
+                                    'Yellow', 'Turquoise','Gold', 'Multicolour', 'Beige', 'Burgundy', 'Pink', 'Maroon', 'Magenta', 'Navy', 'Indigo')
+    body_type = st.text_input('Body Type', 'SUV', 'Saloon', 'Hatchback', 'Convertible', 'Limousine', 'Estate', 'MPV', 'Coupe',
+                              'Pickup', 'Combi Van', 'Panel Van', 'Minibus','Window Van', 'Camper', 'Car Derived Van', 'Chassis Cab')
+    vehicle_condition = st.selectbox('Vehicle Condition', ['USED', 'NEW'])
+    fuel_type = st.text_input('Fuel Type', 'Petrol Plug-in Hybrid', 'Diesel', 'Petrol', 'Diesel Hybrid',
+                              'Petrol Hybrid', 'Electric', 'Diesel Plug-in Hybrid', 'Bi Fuel','Natural Gas')
+
+    # Validate inputs
+    if not selected_make or not selected_model:
+        st.warning("Please select both a car make and model.")
+        return
 
     # Create input data dictionary
     input_data = {
         'mileage': mileage,
         'standard_colour': standard_colour,
-        'standard_make': standard_make,
-        'standard_model': standard_model,
+        'standard_make': selected_make,
+        'standard_model': selected_model,
         'vehicle_condition': vehicle_condition,
         'year_of_registration': year_of_registration,
         'body_type': body_type,
-        'crossover_car_and_van': crossover_car_and_van,
         'fuel_type': fuel_type
     }
 
