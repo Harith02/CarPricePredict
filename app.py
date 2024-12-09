@@ -40,7 +40,12 @@ def app():
     # Add introductory text
     st.markdown("""
     ## Welcome to the Car Price Prediction App!
-    This app predicts the price of a car based on various features.
+                
+    This app predicts the price of a car based on various features such as the make, model, mileage, and more.
+    Please fill in the details below to get the predicted price.
+                
+    Please note that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
+
     """)
 
     # Load the make-model mapping
