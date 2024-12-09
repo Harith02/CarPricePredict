@@ -59,13 +59,13 @@ def app():
     # Other input fields
     mileage = st.number_input('Mileage', min_value=0)
     year_of_registration = st.number_input('Year of Registration', min_value=1900, max_value=2024)
-    standard_colour = st.text_input('Car Colour', 'Grey', 'Blue', 'Brown', 'Red', 'Bronze', 'Black', 'White','Silver', 'Purple', 'Green', 'Orange', 
-                                    'Yellow', 'Turquoise','Gold', 'Multicolour', 'Beige', 'Burgundy', 'Pink', 'Maroon', 'Magenta', 'Navy', 'Indigo')
-    body_type = st.text_input('Body Type', 'SUV', 'Saloon', 'Hatchback', 'Convertible', 'Limousine', 'Estate', 'MPV', 'Coupe',
-                              'Pickup', 'Combi Van', 'Panel Van', 'Minibus','Window Van', 'Camper', 'Car Derived Van', 'Chassis Cab')
+    standard_colour = st.selectbox('Car Colour', ['Grey', 'Blue', 'Brown', 'Red', 'Bronze', 'Black', 'White','Silver', 'Purple', 'Green', 'Orange', 
+                                    'Yellow', 'Turquoise','Gold', 'Multicolour', 'Beige', 'Burgundy', 'Pink', 'Maroon', 'Magenta', 'Navy', 'Indigo'])
+    body_type = st.selectbox('Body Type', ['SUV', 'Saloon', 'Hatchback', 'Convertible', 'Limousine', 'Estate', 'MPV', 'Coupe',
+                              'Pickup', 'Combi Van', 'Panel Van', 'Minibus','Window Van', 'Camper', 'Car Derived Van', 'Chassis Cab'])
     vehicle_condition = st.selectbox('Vehicle Condition', ['USED', 'NEW'])
-    fuel_type = st.text_input('Fuel Type', 'Petrol Plug-in Hybrid', 'Diesel', 'Petrol', 'Diesel Hybrid',
-                              'Petrol Hybrid', 'Electric', 'Diesel Plug-in Hybrid', 'Bi Fuel','Natural Gas')
+    fuel_type = st.selectbox('Fuel Type', ['Petrol Plug-in Hybrid', 'Diesel', 'Petrol', 'Diesel Hybrid',
+                              'Petrol Hybrid', 'Electric', 'Diesel Plug-in Hybrid', 'Bi Fuel','Natural Gas'])
 
     # Validate inputs
     if not selected_make or not selected_model:
