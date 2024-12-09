@@ -45,7 +45,15 @@ def app():
     Please fill in the details below to get the predicted price.
                 
     Please note that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
+    
+    ### How does the model work?
+    The model predicts the price of a car based on features such as:
+    - Vehicle condition (new or used)
+    - Car make, model, color, and body type
+    - Fuel type and mileage
+    - Year of registration
 
+    If you have any questions, feel free to reach out!
     """)
 
     # Load the make-model mapping
@@ -88,24 +96,12 @@ def app():
     processed_input = preprocess_input(input_data)
 
     # Predict the price
-
     with st.spinner('Predicting the price...'):
         predicted_price_scaled = model.predict(processed_input)[0]
         predicted_price = standardize.inverse_transform([[predicted_price_scaled]])[0][0]
 
     st.write(f'### Predicted Price: ${predicted_price:.2f}')
 
-    # Add more interactive elements or information if desired
-    st.markdown("""
-    ### How does the model work?
-    The model predicts the price of a car based on features such as:
-    - Vehicle condition (new or used)
-    - Car make, model, color, and body type
-    - Fuel type and mileage
-    - Year of registration
-
-    If you have any questions, feel free to reach out!
-    """)
 
 if __name__ == '__main__':
     app()
