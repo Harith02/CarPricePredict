@@ -37,7 +37,7 @@ def preprocess_input(features):
 def app():
     with st.sidebar:
          with st.echo():
-        st.write("This code will be printed to the sidebar.")
+            st.write("This code will be printed to the sidebar.")
 
     st.title('Car Price Prediction')
 
