@@ -36,29 +36,25 @@ def preprocess_input(features):
 # Streamlit app
 def app():
     with st.sidebar:
-         with st.echo():
-            st.write("This code will be printed to the sidebar.")
+            st.markdown("""
+                ## Welcome to the Car Price Prediction App!
+                            
+                This app predicts the price of a car based on various features such as the make, model, mileage, and more.
+                Please fill in the details below to get the predicted price.
+                            
+                Please note that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
+                
+                ### How does the model work?
+                The model predicts the price of a car based on features such as:
+                - Vehicle condition (new or used)
+                - Car make, model, color, and body type
+                - Fuel type and mileage
+                - Year of registration
+            
+                If you have any questions, feel free to reach out!
+                """)
 
     st.title('Car Price Prediction')
-
-    # Add introductory text
-    st.markdown("""
-    ## Welcome to the Car Price Prediction App!
-                
-    This app predicts the price of a car based on various features such as the make, model, mileage, and more.
-    Please fill in the details below to get the predicted price.
-                
-    Please note that, the prediction has an accuracy of 81%, therefore the price shown might not be the actual price of the car.
-    
-    ### How does the model work?
-    The model predicts the price of a car based on features such as:
-    - Vehicle condition (new or used)
-    - Car make, model, color, and body type
-    - Fuel type and mileage
-    - Year of registration
-
-    If you have any questions, feel free to reach out!
-    """)
 
     # Load the make-model mapping
     with open('make_model_mapping.json', 'r') as json_file:
