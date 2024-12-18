@@ -20,7 +20,7 @@ dt['year_of_registration'] = dt['year_of_registration'].fillna(dt['year_of_regis
 
 # Feature Selection
 dt_select = dt.drop(columns=['public_reference','reg_code','crossover_car_and_van'], inplace=False)
-dt_sampled = dt_select.sample(n=10000, random_state=23)
+dt_sampled = dt_select.sample(n=20000, random_state=23)
 
 # Data Encoding
 condition_order = ['USED', 'NEW']
