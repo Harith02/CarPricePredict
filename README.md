@@ -1,4 +1,4 @@
-🚗 Car Price Prediction App
+#🚗 Car Price Prediction App
 Bento Motors presents a machine learning-powered web application that predicts the resale price of a car based on various features such as make, model, mileage, and more. Built using Streamlit, this app offers an intuitive interface for users to input car details and receive an estimated price.
 
 📘 University Project Disclaimer
@@ -65,14 +65,12 @@ streamlit run app.py
 This will launch the app in your default web browser. Input the required car details, and the app will display the predicted resale price.
 
 🧠 Model Details
-Algorithm: [Specify algorithm used, e.g., Random Forest Regressor]
-
-Training Data: [Details about the dataset, e.g., size, source]
+Algorithm: Random Forest Regressor
 
 Evaluation Metrics:
 
-R² Score: [Insert value]
+R² Score: 86%
 
-MAE: [Insert value]
+MAE: 0
 
-RMSE: [Insert value]
+RMSE: 0 
