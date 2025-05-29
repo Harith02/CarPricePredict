@@ -8,7 +8,7 @@ This project was developed as part of a university assignment for academic purpo
 📊 Features
 Interactive Web Interface: User-friendly inputs for car features.
 
-Machine Learning Model: Predicts car prices with approximately 81% accuracy.
+Machine Learning Model: Predicts car prices with approximately 86% accuracy.
 
 Data Preprocessing: Handles missing values using median imputation.
 
